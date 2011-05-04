@@ -60,6 +60,19 @@ Spec::Rake::SpecTask.new(:spec => spec_prereq) do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
+namespace :hudson do
+  task :spec => ["hudson:setup:rspec", 'rake:spec']
+
+  namespace :setup do
+    task :pre_ci do
+      ENV["CI_REPORTS"] = 'hudson/reports/spec/'
+      gem 'ci_reporter'
+      require 'ci/reporter/rake/rspec'
+    end
+    task :rspec => [:pre_ci, "ci:setup:rspec"]
+  end
+end
+
 namespace :spec do
   desc "Run all specs in spec directory with RCov (excluding plugin specs)"
   Spec::Rake::SpecTask.new(:rcov) do |t|
@@ -139,20 +152,6 @@ namespace :spec do
       end
     end
   end
-  
-  namespace :hudson do
-    task :spec => ["hudson:setup:rspec", 'rake:spec']
-  
-    namespace :setup do
-      task :pre_ci do
-        ENV["CI_REPORTS"] = 'hudson/reports/spec/'
-        gem 'ci_reporter'
-        require 'ci/reporter/rake/rspec'
-      end
-      task :rspec => [:pre_ci, "ci:setup:rspec"]
-    end
-  end
-  
 end
 
 end
