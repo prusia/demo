@@ -61,7 +61,7 @@ Spec::Rake::SpecTask.new(:spec => spec_prereq) do |t|
 end
 
 namespace :hudson do
-  task :spec => ["hudson:setup:rspec", 'rake:spec']
+  task :spec => ["hudson:setup:rspec", 'rake:spec:rcov']
 
   namespace :setup do
     task :pre_ci do
