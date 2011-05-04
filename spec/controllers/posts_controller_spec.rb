@@ -26,7 +26,7 @@ describe PostsController do
     it "assigns a new post as @post" do
       Post.stub(:new).and_return(mock_post)
       get :new
-      assigns[:post].should equal(mock_post)
+      assigns[:post].should equal("mock_post")
     end
   end
 
