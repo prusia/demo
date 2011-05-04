@@ -10,7 +10,7 @@ describe PostsController do
     it "assigns all posts as @posts" do
       Post.stub(:find).with(:all).and_return([mock_post])
       get :index
-      assigns[:posts].should == [mock_post]
+      assigns[:posts].should == ['mock_post']
     end
   end
 
@@ -34,41 +34,10 @@ describe PostsController do
     it "assigns the requested post as @post" do
       Post.stub(:find).with("37").and_return(mock_post)
       get :edit, :id => "37"
-      assigns[:post].should equal(mock_post)
+      assigns[:post].should equal('mock_post')
     end
   end
 
-  describe "POST create" do
-
-    describe "with valid params" do
-      it "assigns a newly created post as @post" do
-        Post.stub(:new).with({'these' => 'params'}).and_return(mock_post(:save => true))
-        post :create, :post => {:these => 'params'}
-        assigns[:post].should equal(mock_post)
-      end
-
-      it "redirects to the created post" do
-        Post.stub(:new).and_return(mock_post(:save => true))
-        post :create, :post => {}
-        response.should redirect_to(post_url(mock_post))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved post as @post" do
-        Post.stub(:new).with({'these' => 'params'}).and_return(mock_post(:save => false))
-        post :create, :post => {:these => 'params'}
-        assigns[:post].should equal(mock_post)
-      end
-
-      it "re-renders the 'new' template" do
-        Post.stub(:new).and_return(mock_post(:save => false))
-        post :create, :post => {}
-        response.should render_template('new')
-      end
-    end
-
-  end
 
   describe "PUT update" do
 
@@ -102,7 +71,7 @@ describe PostsController do
       it "assigns the post as @post" do
         Post.stub(:find).and_return(mock_post(:update_attributes => false))
         put :update, :id => "1"
-        assigns[:post].should equal(mock_post)
+        assigns[:post].should equal('mock_post')
       end
 
       it "re-renders the 'edit' template" do
