@@ -38,6 +38,38 @@ describe PostsController do
     end
   end
 
+  describe "POST create" do
+
+    describe "with valid params" do
+      it "assigns a newly created post as @post" do
+        Post.stub(:new).with({'these' => 'params'}).and_return(mock_post(:save => true))
+        post :create, :post => {:these => 'params'}
+        assigns[:post].should equal(mock_post)
+      end
+
+      it "redirects to the created post" do
+        Post.stub(:new).and_return(mock_post(:save => true))
+        post :create, :post => {}
+        response.should redirect_to(post_url(mock_post))
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved post as @post" do
+        Post.stub(:new).with({'these' => 'params'}).and_return(mock_post(:save => false))
+        post :create, :post => {:these => 'params'}
+        assigns[:post].should equal(mock_post)
+      end
+
+      it "re-renders the 'new' template" do
+        Post.stub(:new).and_return(mock_post(:save => false))
+        post :create, :post => {}
+        response.should render_template('new')
+      end
+    end
+
+  end
+
   describe "PUT update" do
 
     describe "with valid params" do
