@@ -141,7 +141,7 @@ namespace :spec do
   end
   
   namespace :hudson do
-    task :spec => ["hudson:setup:rspec", 'db:migrate', 'rake:spec']
+    task :spec => ["hudson:setup:rspec", 'rake:spec']
   
     namespace :setup do
       task :pre_ci do
