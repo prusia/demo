@@ -10,7 +10,7 @@ describe PostsController do
     it "assigns all posts as @posts" do
       Post.stub(:find).with(:all).and_return([mock_post])
       get :index
-      assigns[:posts].should == ['mock_post']
+      assigns[:posts].should == [mock_post]
     end
   end
 
@@ -34,10 +34,9 @@ describe PostsController do
     it "assigns the requested post as @post" do
       Post.stub(:find).with("37").and_return(mock_post)
       get :edit, :id => "37"
-      assigns[:post].should equal('mock_post')
+      assigns[:post].should equal(mock_post)
     end
   end
-
 
   describe "PUT update" do
 
@@ -71,7 +70,7 @@ describe PostsController do
       it "assigns the post as @post" do
         Post.stub(:find).and_return(mock_post(:update_attributes => false))
         put :update, :id => "1"
-        assigns[:post].should equal('mock_post')
+        assigns[:post].should equal(mock_post)
       end
 
       it "re-renders the 'edit' template" do
