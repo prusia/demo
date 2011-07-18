@@ -1,3 +1,5 @@
+require 'metric_fu'
+
 gem 'test-unit', '1.2.3' if RUBY_VERSION.to_f >= 1.9
 rspec_gem_dir = nil
 Dir["#{RAILS_ROOT}/vendor/gems/*"].each do |subdir|
