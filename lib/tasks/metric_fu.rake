@@ -1,4 +1,4 @@
-require 'metrics_fu'
+require 'metric_fu'
 
 MetricFu::Configuration.run do |config|
         config.metrics  = [:roodi]
